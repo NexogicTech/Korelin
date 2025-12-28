@@ -53,3 +53,9 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# User specified ignores
+.idea/
+cmake-build-debug/
+bin/
+doc/
