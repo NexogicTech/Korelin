@@ -27,4 +27,10 @@ add_executable(Korelin src/korelin.c
         src/rungo/package.c
         src/rungo/package.h
         src/kpackage.c
-        src/kpackage.h)
+        src/kpackage.h
+        src/klexer.c
+        src/klexer.h
+        src/libs/knet.c
+        src/libs/knet.h
+        src/libs/kmath.c
+        src/libs/kmath.h)
