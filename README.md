@@ -1,3 +1,3 @@
 ## Korelin - Lightweight script language
-![logo](./korelin.png)
+![logo](./korelin.pngn
 > A modern, scalable, lightweight virtual machine scripting language.
