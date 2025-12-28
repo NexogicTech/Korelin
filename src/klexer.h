@@ -6,7 +6,7 @@
 #define KORELIN_LEXER_H
 
 typedef enum {
-    // 特殊 Token
+    // Special Token
     KORELIN_EOF,
     KORELIN_ERROR,
 
