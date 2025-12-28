@@ -35,4 +35,8 @@ add_executable(Korelin src/korelin.c
         src/libs/knet.c
         src/libs/knet.h
         src/libs/kmath.c
-        src/libs/kmath.h)
+        src/libs/kmath.h
+        src/libs/stdlib.c
+        src/libs/stdlib.h
+        src/libs/kmap.c
+        src/libs/kmap.h)
