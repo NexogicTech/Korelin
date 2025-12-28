@@ -58,4 +58,4 @@ dkms.conf
 .idea/
 cmake-build-debug/
 bin/
-doc/
+
