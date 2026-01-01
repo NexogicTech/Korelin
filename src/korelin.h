@@ -5,6 +5,6 @@
 #ifndef KORELIN_KORELIN_H
 #define KORELIN_KORELIN_H
 
-#define KORELIN_VERSION 1.0.0
+#define KORELIN_VERSION "1.0.0"
 
 #endif //KORELIN_KORELIN_H

@@ -5,4 +5,6 @@
 #ifndef KORELIN_KVM_H
 #define KORELIN_KVM_H
 
+void KorelinVMMain();
+
 #endif //KORELIN_KVM_H

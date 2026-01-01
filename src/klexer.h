@@ -104,6 +104,7 @@ typedef struct {
     KorelinTokenType type;
     const char* value;      // 指向动态分配的Token文本值的指针，需要手动释放
     size_t length;          // 值的长度
+    int needs_free;        // 标志位：是否需要释放 value 内存 (1: needs free, 0: static)
 } KorelinToken;
 
 // 词法分析器 (Lexer) 结构体

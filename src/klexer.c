@@ -37,7 +37,36 @@ static void skip_whitespace(KorelinLexer* lexer) {
 
 // 辅助函数：创建一个静态分配的Token（用于单/双字符）
 static KorelinToken new_token(KorelinTokenType type, const char* value, size_t length) {
-    return (KorelinToken){.type = type, .value = value, .length = length};
+    return (KorelinToken){.type = type, .value = value, .length = length, .needs_free = 0};
+}
+
+// 辅助函数：读取字符串字面量
+static KorelinToken read_string(KorelinLexer* lexer) {
+    size_t start_pos = lexer->position;
+    char quote_char = lexer->current_char;
+    advance(lexer); // 跳过起始引号
+
+    while (lexer->current_char != quote_char && lexer->current_char != '\0') {
+        if (lexer->current_char == '\\' && peek(lexer) == quote_char) {
+            advance(lexer); // 跳过转义字符
+        }
+        advance(lexer);
+    }
+
+    if (lexer->current_char == quote_char) {
+        advance(lexer); // 消耗结束引号
+    }
+
+    size_t len = lexer->position - start_pos;
+    char* literal = malloc(len + 1);
+    if (!literal) {
+        fprintf(stderr, "Error: malloc failed in read_string\n");
+        exit(EXIT_FAILURE);
+    }
+    strncpy(literal, lexer->input + start_pos, len);
+    literal[len] = '\0';
+
+    return (KorelinToken){.type = KORELIN_STRING, .value = literal, .length = len, .needs_free = 1};
 }
 
 // 关键字查找函数
@@ -87,7 +116,7 @@ static KorelinToken read_identifier(KorelinLexer* lexer) {
     literal[len] = '\0';
 
     KorelinTokenType type = lookup_ident(literal);
-    KorelinToken token = {.type = type, .value = literal, .length = len};
+    KorelinToken token = {.type = type, .value = literal, .length = len, .needs_free = 1};
     return token;
 }
 
@@ -106,7 +135,7 @@ static KorelinToken read_number(KorelinLexer* lexer) {
     strncpy(literal, lexer->input + start_pos, len);
     literal[len] = '\0';
 
-    KorelinToken token = {.type = KORELIN_INT, .value = literal, .length = len};
+    KorelinToken token = {.type = KORELIN_INT, .value = literal, .length = len, .needs_free = 1};
     return token;
 }
 
@@ -214,6 +243,11 @@ KorelinToken next_korelin_token(KorelinLexer* lexer) {
         case '\0':
             token = new_token(KORELIN_EOF, "", 0);
             break;
+
+        // --- 字符串字面量 ---
+        case '"':
+        case '\'':
+            return read_string(lexer);
 
         // --- 默认情况：标识符、数字或错误 ---
         default:

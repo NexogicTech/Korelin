@@ -5,7 +5,8 @@ set(CMAKE_C_STANDARD 11)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-add_executable(Korelin src/korelin.c
+add_executable(Korelin
+        src/korelin.c
         src/korelin.cpp
         src/krilib.c
         src/krilib.h
@@ -22,12 +23,12 @@ add_executable(Korelin src/korelin.c
         src/kstruct.h
         src/kric.c
         src/kric.h
-        src/rungo/rungo.c
-        src/rungo/rungo.h
-        src/rungo/download.c
-        src/rungo/download.h
-        src/rungo/package.c
-        src/rungo/package.h
+        src/krip/rungo.c
+        src/krip/rungo.h
+        src/krip/download.c
+        src/krip/download.h
+        src/krip/package.c
+        src/krip/package.h
         src/kpackage.c
         src/kpackage.h
         src/klexer.c
@@ -39,4 +40,9 @@ add_executable(Korelin src/korelin.c
         src/libs/stdlib.c
         src/libs/stdlib.h
         src/libs/kmap.c
-        src/libs/kmap.h)
+        src/libs/kmap.h
+        src/ast.c
+        src/ast.h
+        src/kevaluator.c
+        src/kevaluator.h
+)
